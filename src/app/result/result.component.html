@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-8">
+    <h3>Here is Review of Your Test</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-10">
+    <div class="alert alert-success" *ngIf="testPassed==true">
+      <strong>Congratulations! you have Passed the Test. Your Score is {{testScore}} %.</strong>
+    </div>
+    <div class="alert alert-danger" *ngIf="testPassed==false">
+      <strong>You have Failed. You need to score atleast 60%</strong>
+    </div>
+    <div class="card mt-3" *ngFor="let ans of answers.answers; let i = index">
+      <div class="card-body">
+        ({{ans.quetionKey}}) {{ ans.question }}
+        <div class="row">
+          <div class="col-10">
+            Selected Option: {{ testResults[i]===''? 'No Answer Selected' : testResults[i] }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10">
+            {{ +testResults[i]===+ans.answer.answerKey ? 'Correct Answer':
+            'Worng Answer'}}
+          </div>
+        </div>
+        <span *ngIf="+testResults[i]!==+ans.answer.answerKey">
+          {{ 'Correct Option: '+'('+ans.answer.answerKey+') '+ans.answer.answer }}
+        </span>
+      </div>
+    </div>
+    <button class="btn btn-success mt-3 mr-3" (click)="calculateResult()">Check Result</button>
+    <button *ngIf="testPassed==false" class="btn btn-primary mt-3" (click)="OnTryAgain()">Try Again</button>
+  </div>
+</div>
